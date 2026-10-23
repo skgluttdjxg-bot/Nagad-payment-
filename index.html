@@ -29,11 +29,21 @@
         .numberBox .input { padding-right: 25%; font-weight: bold; }
         .copyBtn { position: absolute; right: 2%; top: 50%; transform: translateY(-50%); border: none; background: #e9f5ef; color: #0f7f47; padding: 2% 4%; border-radius: 5px; cursor: pointer; font-size: 3.5vw; font-weight: 700; white-space: nowrap; }
         .button { width: 100%; border: none; background: #0f7f47; color: #fff; border-radius: 6px; padding: 4%; font-size: 4.5vw; font-weight: 700; margin-top: 4%; cursor: pointer; }
-        .icons { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3%; margin: 6% 0 4%; text-align: center; font-size: 3vw; color: #666; }
-        .icon { border: 1px solid #eee; border-radius: 8px; padding: 4% 2%; background: #fafafa; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2%; }
-        .icon span { font-size: 5vw; }
-        .icon.active { border: 2px solid #d10000; background: #fff; font-weight: bold; }
-        .timer { text-align: center; color: #d10000; font-weight: 700; margin-top: 5%; font-size: 4.5vw; padding-bottom: 5%; }
+        
+        /* নতুন ইমেজ স্টাইল (সবার নিচে মাঝখানে) */
+        .bottom-image-container {
+            text-align: center;
+            margin: 6% 0 4%;
+        }
+        .bottom-image-container img {
+            width: 120px;
+            max-width: 40%;
+            height: auto;
+            object-fit: contain;
+            display: inline-block;
+        }
+
+        .timer { text-align: center; color: #d10000; font-weight: 700; margin-top: 2%; font-size: 4.5vw; padding-bottom: 5%; }
         .timer small { display: block; color: #333; font-weight: 400; margin-top: 2%; font-size: 3.5vw; }
         
         #toast {
@@ -170,12 +180,12 @@
                 <input class="input" type="text" placeholder="ট্রানজেকশন আইডি" />
             </div>
             <button class="button">নিশ্চিত</button>
-            <div class="icons">
-                <div class="icon active"><span>💰</span>পেমেন্ট</div>
-                <div class="icon"><span>📱</span>মোবাইল</div>
-                <div class="icon"><span>🤝</span>সহায়তা</div>
-                <div class="icon"><span>🛍️</span>সেবা</div>
+            
+            <!-- নতুন যুক্ত করা ইমেজ সেকশন -->
+            <div class="bottom-image-container">
+                <img src="IMG_20261020_021205.png" alt="Payment Info">
             </div>
+
             <div class="timer">
                 পেমেন্ট <small id="countdown">বাকি সময় 05:00</small>
             </div>
