@@ -1,243 +1,187 @@
-
 <!doctype html>
 <html lang="bn">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Payment UI</title>
-  <style>
-    body{
-      margin:0;
-      font-family: Arial, sans-serif;
-      background:#f3f3f3;
-      display:flex;
-      justify-content:center;
-    }
-    .phone{
-      width:280px;
-      background:#fff;
-      min-height:100vh;
-      box-shadow:0 0 20px rgba(0,0,0,.08);
-    }
-    .topbar{
-      background:#0f7f47;
-      color:#fff;
-      padding:10px 12px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      font-size:14px;
-      font-weight:700;
-    }
-    .brand{font-size:14px;}
-    .lang{
-      font-size:10px;
-      border:1px solid #fff;
-      padding:2px 6px;
-      border-radius:3px;
-    }
-    .content{padding:12px;}
-    .notice{
-      color:#d10000;
-      font-size:12px;
-      line-height:1.5;
-      margin-bottom:10px;
-    }
-    .card{
-      background:#d000a6;
-      color:#fff;
-      border-radius:6px;
-      padding:12px;
-      display:flex;
-      align-items:center;
-      gap:10px;
-      margin-bottom:12px;
-    }
-    .avatar{
-      width:34px;
-      height:34px;
-      border-radius:50%;
-      background:#fff;
-      color:#d000a6;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:10px;
-      font-weight:700;
-      flex:0 0 auto;
-      overflow:hidden;
-    }
-    .avatar img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-    }
-    .label{
-      font-size:12px;
-      margin-bottom:4px;
-    }
-    .field{margin:10px 0;}
-    .input{
-      width:100%;
-      box-sizing:border-box;
-      border:1px solid #ccc;
-      border-radius:6px;
-      padding:12px;
-      font-size:12px;
-      outline:none;
-    }
-    .numberBox{
-      position:relative;
-    }
-    .copyBtn{
-      position:absolute;
-      right:6px;
-      top:50%;
-      transform:translateY(-50%);
-      border:none;
-      background:#e9f5ef;
-      color:#0f7f47;
-      padding:6px 8px;
-      border-radius:5px;
-      cursor:pointer;
-      font-size:12px;
-      font-weight:700;
-    }
-    .button{
-      width:100%;
-      border:1px solid #222;
-      background:#fff;
-      border-radius:8px;
-      padding:12px;
-      font-size:14px;
-      font-weight:700;
-      margin-top:8px;
-      cursor:pointer;
-    }
-    .icons{
-      display:flex;
-      justify-content:space-between;
-      gap:6px;
-      margin:16px 0 8px;
-      text-align:center;
-      font-size:10px;
-      color:#666;
-    }
-    .icon{
-      flex:1;
-      border:1px solid #eee;
-      border-radius:8px;
-      padding:10px 4px;
-      background:#fafafa;
-    }
-    .icon.active{
-      border:2px solid #d10000;
-      background:#fff;
-    }
-    .timer{
-      text-align:center;
-      color:#d10000;
-      font-weight:700;
-      margin-top:10px;
-      font-size:14px;
-    }
-    .timer small{
-      display:block;
-      color:#333;
-      font-weight:400;
-      margin-top:4px;
-      font-size:11px;
-    }
-    .footer{
-      font-size:9px;
-      color:#999;
-      line-height:1.4;
-      margin-top:12px;
-    }
-  </style>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Payment UI</title>
+    <style>
+        * { box-sizing: border-box; }
+        body { margin: 0; font-family: Arial, sans-serif; background: #f3f3f3; min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 0; }
+        .phone { width: 100%; height: 100vh; background: #fff; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; position: relative; }
+        .topbar { background: #0f7f47; color: #fff; padding: 4% 5%; display: flex; justify-content: space-between; align-items: center; gap: 3%; font-size: 4vw; font-weight: 700; }
+        .amount-box { border: 2px solid #fff; padding: 2% 4%; border-radius: 6px; font-size: 4vw; }
+        .brand { font-size: 4vw; }
+        .lang { font-size: 3vw; border: 1px solid #fff; padding: 1% 2%; border-radius: 4px; white-space: nowrap; }
+        .content { padding: 5% 5%; width: 100%; flex: 1; display: flex; flex-direction: column; overflow-y: auto; }
+        .logo-placeholder { width: 100px; height: 100px; background: #f9f9f9; border: 2px dashed #ccc; border-radius: 10px; margin: 0 auto 15px auto; display: flex; justify-content: center; align-items: center; font-size: 14px; color: #777; text-align: center; font-weight: bold; overflow: hidden; }
+        .logo-placeholder img { max-width: 100%; max-height: 100%; object-fit: contain; }
+        .notice { color: #d10000; font-size: 3.8vw; line-height: 1.5; margin-bottom: 5%; word-break: break-word; font-weight: 600; background: #fff0f0; padding: 4%; border-radius: 6px; border-left: 4px solid #d10000; }
+        
+        .card { background: #ff6600; color: #fff; border-radius: 8px; padding: 5%; display: flex; align-items: center; gap: 4%; margin-bottom: 5%; width: 100%; }
+        .avatar { width: 12vw; height: 12vw; border-radius: 50%; background: #fff; color: #ff6600; display: flex; align-items: center; justify-content: center; font-size: 3vw; font-weight: 700; flex: 0 0 auto; overflow: hidden; }
+        .avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        
+        .label { font-size: 4vw; margin-bottom: 2%; font-weight: bold; color: #222; }
+        .bonus-box { background: #e9f5ef; border: 1px solid #0f7f47; color: #0f7f47; padding: 4%; border-radius: 8px; margin-bottom: 5%; font-size: 4vw; font-weight: bold; text-align: center; }
+        .field { margin: 4% 0; }
+        .input { width: 100%; border: 1px solid #ccc; border-radius: 6px; padding: 4% 3%; font-size: 4vw; outline: none; background: #fff; }
+        .numberBox { position: relative; }
+        .numberBox .input { padding-right: 25%; font-weight: bold; }
+        .copyBtn { position: absolute; right: 2%; top: 50%; transform: translateY(-50%); border: none; background: #e9f5ef; color: #0f7f47; padding: 2% 4%; border-radius: 5px; cursor: pointer; font-size: 3.5vw; font-weight: 700; white-space: nowrap; }
+        .button { width: 100%; border: none; background: #0f7f47; color: #fff; border-radius: 6px; padding: 4%; font-size: 4.5vw; font-weight: 700; margin-top: 4%; cursor: pointer; }
+        .icons { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3%; margin: 6% 0 4%; text-align: center; font-size: 3vw; color: #666; }
+        .icon { border: 1px solid #eee; border-radius: 8px; padding: 4% 2%; background: #fafafa; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2%; }
+        .icon span { font-size: 5vw; }
+        .icon.active { border: 2px solid #d10000; background: #fff; font-weight: bold; }
+        .timer { text-align: center; color: #d10000; font-weight: 700; margin-top: 5%; font-size: 4.5vw; padding-bottom: 5%; }
+        .timer small { display: block; color: #333; font-weight: 400; margin-top: 2%; font-size: 3.5vw; }
+        
+        #toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: #0f7f47;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 4vw;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            opacity: 0;
+            transition: all 0.3s ease;
+            pointer-events: none;
+            z-index: 1000;
+        }
+        #toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+    </style>
+    <script>
+        function updateBonus() {
+            let amountInput = document.getElementById("amountInput").value;
+            let amount = parseFloat(amountInput);
+            let bonusDisplay = document.getElementById("bonusDisplay");
+            let amountDisplay = document.getElementById("amountDisplay");
+            let amountInputEl = document.getElementById("amountInput");
+            let errorMsgEl = document.getElementById("errorMsg");
+            
+            if (!isNaN(amount) && amount > 0) {
+                if (amount < 300) {
+                    amountInputEl.style.borderColor = "#d10000";
+                    amountInputEl.style.backgroundColor = "#fff0f0";
+                    errorMsgEl.style.display = "block";
+                    bonusDisplay.textContent = "বোনাস সহ আপনার টোটাল ব্যালেন্স: 0 টাকা";
+                    amountDisplay.textContent = "BDT " + amount;
+                } else {
+                    amountInputEl.style.borderColor = "#ccc";
+                    amountInputEl.style.backgroundColor = "#fff";
+                    errorMsgEl.style.display = "none";
+                    let bonus = amount * 3;
+                    let total = amount + bonus;
+                    bonusDisplay.textContent = "বোনাস সহ আপনার টোটাল ব্যালেন্স: " + total + " টাকা";
+                    amountDisplay.textContent = "BDT " + amount;
+                }
+            } else {
+                amountInputEl.style.borderColor = "#ccc";
+                amountInputEl.style.backgroundColor = "#fff";
+                errorMsgEl.style.display = "none";
+                bonusDisplay.textContent = "বোনাস সহ আপনার টোটাল ব্যালেন্স: 0 টাকা";
+                amountDisplay.textContent = "BDT 0";
+            }
+        }
+
+        function copyNumber() {
+            const number = document.getElementById("walletNumber").value;
+            navigator.clipboard.writeText(number).then(() => {
+                showToast("নাম্বার কপি হয়েছে!");
+            });
+        }
+
+        function showToast(message) {
+            let toast = document.getElementById("toast");
+            toast.textContent = message;
+            toast.classList.add("show");
+            setTimeout(() => {
+                toast.classList.remove("show");
+            }, 1500);
+        }
+
+        let timeLeft = 5 * 60;
+        const countdownEl = document.getElementById("countdown");
+        function updateTimer() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            countdownEl.textContent = "বাকি সময় " + String(minutes).padStart(2, "0") + ":" + String(seconds).padStart(2, "0");
+            if (timeLeft > 0) {
+                timeLeft--;
+                setTimeout(updateTimer, 1000);
+            } else {
+                countdownEl.textContent = "সময় শেষ";
+            }
+        }
+        window.onload = function() {
+            updateTimer();
+            updateBonus();
+        };
+    </script>
 </head>
 <body>
-  <div class="phone">
-    <div class="topbar">
-      <div>BDT 500</div>
-      <div class="brand">PAY SERVICE</div>
-      <div class="lang">EN | বাংলা</div>
+    <div class="phone">
+        <div class="topbar">
+            <div class="amount-box" id="amountDisplay">BDT 0</div>
+            <div class="brand">PAY SERVICE</div>
+            <div class="lang">EN | বাংলা</div>
+        </div>
+        <div class="content">
+            <div class="logo-placeholder">
+                <img src="wj2.png" alt="Logo">
+            </div>
+            <div class="notice">
+                নিচে দেওয়া নগদ ওয়ালেট নাম্বারে মানি করুন এবং ট্রানজেকশন আইডি বসিয়ে নিশ্চিত করুন।
+            </div>
+            <div class="field">
+                <div class="label">পরিমাণ লিখুন</div>
+                <input class="input" id="amountInput" type="number" placeholder="পরিমাণ লিখুন (ন্যূনতম ৩০০)" oninput="updateBonus()" />
+                <div id="errorMsg" style="color: #d10000; font-size: 13px; font-weight: bold; margin-top: 6px; display: none;">ন্যূনতম ৩০০ টাকা</div>
+            </div>
+            <div class="bonus-box" id="bonusDisplay">
+                বোনাস সহ আপনার টোটাল ব্যালেন্স: 0 টাকা
+            </div>
+            <div class="card">
+                <div class="avatar">
+                    <img src="2057_4-78566033-icon.jpg" alt="logo">
+                </div>
+                <div>
+                    <div class="label" style="color:#fff;">নগদ Deposit</div>
+                </div>
+            </div>
+            <div class="field">
+                <div class="label">Wallet No*</div>
+                <div style="font-size:3.8vw; margin-bottom:2%; color: #555;">নিচের নাম্বারে টাকা পাঠাতে হবে:</div>
+                <div class="numberBox">
+                    <input class="input" id="walletNumber" type="text" value="01614175872" readonly />
+                    <button class="copyBtn" onclick="copyNumber()">কপি</button>
+                </div>
+            </div>
+            <div class="field">
+                <div class="label">TrxID</div>
+                <input class="input" type="text" placeholder="ট্রানজেকশন আইডি" />
+            </div>
+            <button class="button">নিশ্চিত</button>
+            <div class="icons">
+                <div class="icon active"><span>💰</span>পেমেন্ট</div>
+                <div class="icon"><span>📱</span>মোবাইল</div>
+                <div class="icon"><span>🤝</span>সহায়তা</div>
+                <div class="icon"><span>🛍️</span>সেবা</div>
+            </div>
+            <div class="timer">
+                পেমেন্ট <small id="countdown">বাকি সময় 05:00</small>
+            </div>
+        </div>
     </div>
 
-    <div class="content">
-      <div class="notice">
-        আপনি যদি টাকা পাঠানোর পরিবর্তন করতে চান 500, আপনি নিচে লেখা ব্যবহার করতে হবে না।
-      </div>
-
-      <div class="card">
-        <div class="avatar">
-          <img src="images (2).png" alt="logo">
-        </div>
-        <div>
-          <div class="label">বিকাশ Deposit</div>
-        </div>
-      </div>
-
-      <div class="label">Wallet No*</div>
-      <div style="font-size:13px;margin-bottom:8px;">এটি বিকাশ নাম্বার দেখুন যদি আপনি টাকা চান</div>
-
-      <div class="field numberBox">
-        <input class="input" id="walletNumber" type="text" value="01580987778" readonly />
-        <button class="copyBtn" onclick="copyNumber()">কপি</button>
-      </div>
-
-      <div class="field">
-        <input class="input" type="text" placeholder="ট্রানজেকশন আইডি" />
-      </div>
-
-      <button class="button">নিশ্চিত</button>
-
-      <div class="icons">
-        <div class="icon active">💰<br>পেমেন্ট</div>
-        <div class="icon">📱<br>মোবাইল</div>
-        <div class="icon">🤝<br>সহায়তা</div>
-        <div class="icon">🛍️<br>সেবা</div>
-      </div>
-
-      <div class="timer">
-        পেমেন্ট
-        <small id="countdown">বাকি সময় 05:00</small>
-      </div>
-
-      <div class="footer">নোট: এটি একটি UI mockup.</div>
-    </div>
-  </div>
-
-  <script>
-    function copyNumber() {
-      const number = document.getElementById("walletNumber").value;
-      navigator.clipboard.writeText(number).then(() => {
-        alert("নাম্বার কপি হয়েছে!");
-      });
-    }
-
-    let timeLeft = 5 * 60;
-    const countdownEl = document.getElementById("countdown");
-
-    function updateTimer() {
-      const minutes = Math.floor(timeLeft / 60);
-      const seconds = timeLeft % 60;
-      countdownEl.textContent =
-        "বাকি সময় " +
-        String(minutes).padStart(2, "0") + ":" +
-        String(seconds).padStart(2, "0");
-
-      if (timeLeft > 0) {
-        timeLeft--;
-        setTimeout(updateTimer, 1000);
-      } else {
-        countdownEl.textContent = "সময় শেষ";
-      }
-    }
-
-    updateTimer();
-  </script>
+    <div id="toast">নাম্বার কপি হয়েছে!</div>
 </body>
 </html>
-```
