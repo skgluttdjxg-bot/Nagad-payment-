@@ -30,7 +30,6 @@
         .copyBtn { position: absolute; right: 2%; top: 50%; transform: translateY(-50%); border: none; background: #e9f5ef; color: #0f7f47; padding: 2% 4%; border-radius: 5px; cursor: pointer; font-size: 3.5vw; font-weight: 700; white-space: nowrap; }
         .button { width: 100%; border: none; background: #0f7f47; color: #fff; border-radius: 6px; padding: 4%; font-size: 4.5vw; font-weight: 700; margin-top: 4%; cursor: pointer; }
         
-        /* নতুন ইমেজ স্টাইল (সবার নিচে মাঝখানে) */
         .bottom-image-container {
             text-align: center;
             margin: 6% 0 4%;
@@ -119,11 +118,15 @@
         }
 
         let timeLeft = 5 * 60;
-        const countdownEl = document.getElementById("countdown");
+        
         function updateTimer() {
+            const countdownEl = document.getElementById("countdown");
+            if (!countdownEl) return;
+
             const minutes = Math.floor(timeLeft / 60);
             const seconds = timeLeft % 60;
             countdownEl.textContent = "বাকি সময় " + String(minutes).padStart(2, "0") + ":" + String(seconds).padStart(2, "0");
+            
             if (timeLeft > 0) {
                 timeLeft--;
                 setTimeout(updateTimer, 1000);
@@ -131,6 +134,7 @@
                 countdownEl.textContent = "সময় শেষ";
             }
         }
+
         window.onload = function() {
             updateTimer();
             updateBonus();
@@ -149,7 +153,7 @@
                 <img src="IMG_20261020_021205.png" alt="Logo">
             </div>
             <div class="notice">
-                WJ2.net ৩০০% বোনাসটি  সর্বোচ্চ 1 বার ক্লেইম করতে পারবেন!
+               📢👑 WJ2.net ৩০০% বোনাসটি সর্বোচ্চ 1 বার ক্লেইম করতে পারবেন!🔔🔔✅
             </div>
             <div class="field">
                 <div class="label">পরিমাণ লিখুন</div>
@@ -181,7 +185,6 @@
             </div>
             <button class="button">নিশ্চিত</button>
             
-            <!-- নতুন যুক্ত করা ইমেজ সেকশন -->
             <div class="bottom-image-container">
                 <img src="Screenshot_2026-10-20-03-10-47-419_com.android.chrome.png" alt="Payment Info">
             </div>
